@@ -48,6 +48,7 @@ const createFloors = (noOfFloors, lastFloor) => {
     building.append(floor);
 }
 
+
 //this function is use to create lifts in building
 const createLifts = (noOfLifts) => {
     //this is a lift
@@ -56,9 +57,28 @@ const createLifts = (noOfLifts) => {
     lift.dataset.liftNo = noOfLifts;
     lift.dataset.isMoving = false;
 
+    lift.style.left = ``
+
     //here we are appending ift on ground floor
     let firstFloor = document.getElementById("floor1");
     firstFloor.append(lift);
+}
+
+//we are adding this event to know that you are clicking on button of which floor
+addEventListener("click", (e) => {
+    if(e.target.classList.contains("up-btn") || e.target.classList.contains("down-btn")) {
+        console.log(`Call lift on ${e.target.dataset.floorNo} floor`)
+        moveLift(Number(e.target.dataset.floorNo));
+    }
+})
+
+const moveLift = (calledFloor) => {
+    //this will move our lift on up or down based on calculation
+    console.log(`${-166 * calledFloor}`);
+
+    let lifts = document.querySelector(".lift");
+    lifts.style.transition = `transform ${calledFloor} linear`
+    lifts.style.transform = `translateY(${-166 * (calledFloor - 1)}px)`;
 }
 
 
