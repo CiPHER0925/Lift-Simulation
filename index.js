@@ -75,6 +75,10 @@ submitBtn.addEventListener("click", () => {
     for(let i = 0; i < lifts; i++) {
         createLifts(i);
     }
+
+    //we reset the values to default
+    lift.value = "";
+    floor.value = "";
 })
 
 
