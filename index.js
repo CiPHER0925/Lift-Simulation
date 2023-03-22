@@ -53,11 +53,16 @@ const createFloors = (noOfFloors, lastFloor) => {
 const createLifts = (noOfLifts) => {
     //this is a lift
     let lift = document.createElement("div");
+    let door = document.createElement("div"); //lift door
+
     lift.classList.add("lift");
+    door.classList.add("door");
     lift.dataset.liftNo = noOfLifts;
     lift.dataset.isMoving = false;
 
-    lift.style.left = ``
+    lift.style.left = ``;
+    
+    lift.appendChild(door); //added door inside lift
 
     //here we are appending ift on ground floor
     let firstFloor = document.getElementById("floor1");
@@ -74,11 +79,47 @@ addEventListener("click", (e) => {
 
 const moveLift = (calledFloor) => {
     //this will move our lift on up or down based on calculation
-    console.log(`${-166 * calledFloor}`);
+    // console.log(`${-166 * (calledFloor - 1)}`);
 
-    let lifts = document.querySelector(".lift");
-    lifts.style.transition = `transform ${calledFloor} linear`
-    lifts.style.transform = `translateY(${-166 * (calledFloor - 1)}px)`;
+    let lifts = Array.from(document.querySelectorAll(".lift"));
+    let availableLift = lifts.find((lift) => lift.dataset.isMoving === "false");
+
+    availableLift.style.transition = `transform ${calledFloor}s linear`
+    availableLift.style.transform = `translateY(${-166 * (calledFloor - 1)}px)`;
+    availableLift.dataset.isMoving = true;
+    
+    setTimeout(() => {
+        liftAnimation(availableLift)
+    }, calledFloor * 2000);
+
+    setTimeout(() => {
+        availableLift.dataset.isMoving = false;
+    }, calledFloor * 2000 + 5000)
+
+}
+
+
+const liftAnimation = (targetedLift) => {
+    //used children cause want to access the door div which is indside of lift
+    let targetedLiftDoor = targetedLift.children;
+    
+    //to open door
+    setTimeout(() => {
+        //targetedLift.style.animation = 'openTheDoor 2.5s linear';
+        targetedLiftDoor[0].style.animation = 'openTheDoor 2.5s linear';
+    }, 500);
+
+    //to close door
+    setTimeout(() => {
+        //targetedLift.style.animation = `closeTheDoor 2.5s linear`;
+        targetedLiftDoor[0].style.animation = `closeTheDoor 2.5s linear`;
+    }, 1500)
+
+    //to remove animation
+    setTimeout(() => {
+        //targetedLift.style.animation = "";
+        targetedLiftDoor[0].style.animation = "";
+    }, 3500)
 }
 
 
