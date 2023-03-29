@@ -1,6 +1,7 @@
 const submitBtn = document.getElementById("create");
 const floor = document.getElementById("floor");
 const lift = document.getElementById("lift");
+const inputBox = document.getElementById("input")
 let building = document.getElementById("building");
 let calledFloorQueue = [];
 
@@ -181,6 +182,8 @@ const liftAnimation = (targetedLift) => {
 };
 
 submitBtn.addEventListener("click", () => {
+  console.log(inputBox)
+  inputBox.style.display = "none";
   const lifts = Number(lift.value);
   const floors = Number(floor.value);
 

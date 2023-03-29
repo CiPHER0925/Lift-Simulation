@@ -4,6 +4,44 @@
     box-sizing: border-box;
 }
 
+.input-wrapper {
+    margin: 4rem auto;
+    padding: 5rem;
+    width: 400px;   
+    height: 400px;
+    background: #fff;
+    border: 1px solid #eaeaec;
+}
+
+.input-box {
+    margin: 20px auto;
+    width: 200px;
+    height: 41px;
+}
+
+.title {
+    text-align: center;
+    font-size: 24px;
+}
+
+.lable {
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.btn-submit{
+    background: #fff;
+    border: 1px solid #000;
+    color: black;
+    font-size: 14px;
+    padding: 0 20px;
+    height: 41px;
+    margin: 10px auto;
+    width: 130px;
+    display: block;
+    font-weight: 700;
+}
+
 .floor {
     display: flex;
     width: 1500px;
