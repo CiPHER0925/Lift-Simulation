@@ -66,6 +66,7 @@
     border: none;
     border-radius: 12px;
     background: #04A802;
+    cursor: pointer;
 }
 
 .down-btn {
@@ -75,6 +76,7 @@
     border-radius: 12px;
     background: #DFA000;
     border: none;
+    cursor: pointer;
 }
 
 .lift {
@@ -94,7 +96,7 @@
 
 @keyframes openTheDoor {
     0% {
-        width: 80px;
+        width: 77px;
     }
     25% {
         width: 60px;
@@ -124,6 +126,6 @@
         width: 60px;
     }
     100%  {
-        width: 80px;
+        width: 77px;
     }
 }

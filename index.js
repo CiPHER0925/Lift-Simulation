@@ -130,7 +130,7 @@ const moveLift = (calledFloor) => {
 
   //this condition is used to check if the closest lift is also busy then call the available lift on the floor
   if (closestLift === undefined) {
-    availableLift.style.transition = `transform ${calledFloor}s linear`;
+    availableLift.style.transition = `transform ${calledFloor * 2}s linear`;
     availableLift.style.transform = `translateY(${-166 * (calledFloor - 1)}px)`;
     availableLift.dataset.isMoving = true;
 
@@ -172,13 +172,13 @@ const liftAnimation = (targetedLift) => {
   setTimeout(() => {
     //targetedLift.style.animation = `closeTheDoor 2.5s linear`;
     targetedLiftDoor[0].style.animation = `closeTheDoor 2.5s linear`;
-  }, 1500);
+  }, 3000);
 
   //to remove animation
   setTimeout(() => {
     //targetedLift.style.animation = "";
     targetedLiftDoor[0].style.animation = "";
-  }, 3500);
+  }, 5500);
 };
 
 submitBtn.addEventListener("click", () => {
