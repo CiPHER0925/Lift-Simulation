@@ -2,7 +2,9 @@ const submitBtn = document.getElementById("create");
 const floor = document.getElementById("floor");
 const lift = document.getElementById("lift");
 const inputBox = document.getElementById("input");
-let building = document.getElementById("building");
+const building = document.getElementById("building");
+const toast = document.getElementById("show-toast");
+const closeToastBtn = document.getElementById("close-btn");
 let calledFloorQueue = [];
 
 //this function is use to create floors in building
@@ -206,6 +208,20 @@ const liftAnimation = (targetedLift) => {
   }, 5500);
 };
 
+//toast function to display toast
+const showToast = () => {
+  let isShow = false;
+
+  if(!isShow) {
+    isShow = true;
+    toast.style.display = "block";
+    setTimeout(() => {
+      toast.style.display = "none";
+      clicked = false;
+    }, 2000);
+  }
+}
+
 submitBtn.addEventListener("click", () => {
   const lifts = Number(lift.value);
   const floors = Number(floor.value);
@@ -222,10 +238,13 @@ submitBtn.addEventListener("click", () => {
       createLifts(i);
     }
   } else {
-    alert("Please enter a valid floor number or lift number (>=1)");
+    showToast()
+    //alert("Please enter a valid floor number or lift number (>=1)");
   }
 
   //we reset the values to default
   lift.value = "";
   floor.value = "";
 });
+
+closeToastBtn.addEventListener("click", () => toast.style.display = "none");
