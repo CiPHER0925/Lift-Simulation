@@ -122,67 +122,31 @@ const moveLift = (calledFloor) => {
   // console.log(`${-166 * (calledFloor - 1)}`);
 
   let lifts = Array.from(document.querySelectorAll(".lift"));
-  let availableLift = lifts.find((lift) => lift.dataset.isMoving === "false");
-  let closestLift = lifts.find(
-    (lift) =>
-      lift.dataset.isMoving === "false" &&
-      Number(lift.dataset.liftPos - calledFloor) <= calledFloor
-  );
-  console.log(closestLift);
+  let differenceArray = [];
 
-  let closestLiftDuration = Math.abs(
-    (closestLift.dataset.liftPos - calledFloor) * 2
-  );
+  for(let i  =0; i < lifts.length; i++) {
+    differenceArray.push(Math.abs(calledFloor - Number(lifts[i].dataset.liftPos)));
+    differenceArray.sort();
+    if(differenceArray[0] === Math.abs(calledFloor - Number(lifts[i].dataset.liftPos))) {
+        console.log("im working");
+    }
+  }
 
-  closestLift.style.transition = `transform ${Math.abs(
-    (closestLift.dataset.liftPos - calledFloor) * 2
-  )}s linear`;
-  closestLift.style.transform = `translateY(${-166 * (calledFloor - 1)}px)`;
-  closestLift.dataset.isMoving = true;
+  let lift = lifts.find((lift) => lift.dataset.isMoving === "false" && differenceArray[0] === Math.abs(calledFloor - Number(lift.dataset.liftPos)));
+  let liftDuration = Math.abs(lift.dataset.liftPos -calledFloor) * 2;
 
-  setTimeout(() => {
-    liftAnimation(closestLift);
-  }, closestLiftDuration * 1000);
+  lift.style.transform = `translateY(${-166 * (calledFloor - 1)}px)`;
+  lift.style.transition = `transform ${Math.abs((lift.dataset.liftPos - calledFloor) * 2)}s linear`;
+  lift.dataset.isMoving = "true";
 
   setTimeout(() => {
-    closestLift.dataset.isMoving = false;
-    closestLift.dataset.liftPos = calledFloor;
-  }, closestLiftDuration * 1000 + 5000);
+    liftAnimation(lift);
+  }, liftDuration * 1000);
 
-  //this condition is used to check if the closest lift is also busy then call the available lift on the floor
-  // if (closestLift === undefined) {
-  //     //it will give  you transition duration for available lift
-  // let availableLiftDuration = Math.abs((availableLift.dataset.liftPos - calledFloor) * 2);
-
-  //   availableLift.style.transition = `transform ${availableLiftDuration}s linear`;
-  //   availableLift.style.transform = `translateY(${-166 * (calledFloor - 1)}px)`;
-  //   availableLift.dataset.isMoving = true;
-
-  //   setTimeout(() => {
-  //     liftAnimation(availableLift);
-  //   }, availableLiftDuration * 1000);
-
-  //   setTimeout(() => {
-  //     availableLift.dataset.isMoving = false;
-  //     availableLift.dataset.liftPos = calledFloor;
-  //   }, availableLiftDuration * 1000 + 5000);
-  // } else {
-  //   //it will give  you transition duration for closest lift
-  //   let closestLiftDuration = Math.abs((closestLift.dataset.liftPos - calledFloor) * 2)
-
-  //   closestLift.style.transition = `transform ${Math.abs((closestLift.dataset.liftPos - calledFloor) * 2)}s linear`;
-  //   closestLift.style.transform = `translateY(${-166 * (calledFloor - 1)}px)`;
-  //   closestLift.dataset.isMoving = true;
-
-  //   setTimeout(() => {
-  //     liftAnimation(closestLift);
-  //   }, closestLiftDuration * 1000);
-
-  //   setTimeout(() => {
-  //     closestLift.dataset.isMoving = false;
-  //     closestLift.dataset.liftPos = calledFloor;
-  //   }, closestLiftDuration * 1000 + 5000);
-  // }
+  setTimeout(() => {
+    lift.dataset.isMoving = "false";
+    lift.dataset.liftPos = calledFloor;
+  }, liftDuration * 1000 + 3500)
 };
 
 const liftAnimation = (targetedLift) => {
