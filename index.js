@@ -146,7 +146,7 @@ const moveLift = (calledFloor) => {
   setTimeout(() => {
     lift.dataset.isMoving = "false";
     lift.dataset.liftPos = calledFloor;
-  }, liftDuration * 1000 + 3500)
+  }, liftDuration * 1000 + 6000)
 };
 
 const liftAnimation = (targetedLift) => {
